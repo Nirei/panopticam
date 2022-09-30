@@ -1,75 +1,23 @@
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
+const { application } = require('./src/application')
+const { EVENT_HOST_DISCOVERED } = require('./src/events')
+const { Scanner } = require('./src/scanner')
 
-// Note: Must match `build.appId` in package.json.
-app.setAppUserModelId('com.company.AppName');
 
-// Electron Reloader
-try {
-  require('electron-reloader')(module);
-} catch { }
+// Load application
+application.run().then(() => {
 
-let mainWindow;
-// Create Window.
-const createMainWindow = async () => {
-  const win = new BrowserWindow({
-    title: app.name,
-    show: false,
-    width: 1000,
-    height: 800,
-    // opacity: 0.7,  Add Opacity to app.
-    icon: __dirname + './build/icon.png',
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true, // Protect against prototype pollution.
-      enableRemoteModule: false, // Turn off Remote
-      preload: path.join(app.getAppPath(), './app/preload.js'),
-    },
-  });
-  win.on('ready-to-show', () => {
-    win.show();
-  });
-  win.on('closed', () => {
-    // Dereference the window.
-    // For multiple windows store them in an array.
-    mainWindow = undefined;
-  });
+  const scanner = new Scanner()
+  scanner.onHostDiscovered((value) => application.mainWindow.send(EVENT_HOST_DISCOVERED, value.host))
+  // scanner.run()
 
-  // Optional:
+  // Some test IPs
+  // This one has a live feed
+  application.mainWindow.send(EVENT_HOST_DISCOVERED, '176.63.94.193')
+  
+  // TODO: Scrap default configs from
+  // https://security.world/rtsp/
 
-  win.removeMenu(); // Remove menu.
-  win.webContents.openDevTools(); // Open DevTools.
-
-  await win.loadFile(path.join(__dirname, 'app/index.html'));
-  return win;
-};
-
-// Prevent multiple instances of the app
-if (!app.requestSingleInstanceLock()) {
-  app.quit();
-} 
-
-app.on('second-instance', () => {
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-
-    mainWindow.show();
-  }
-});
-
-app.on('window-all-closed', function() {
-  if (process.platform !== 'darwin') app.quit();
-});
-
-app.on('activate', async () => {
-  if (!mainWindow) {
-    mainWindow = await createMainWindow();
-  }
-});
-
-(async () => {
-  await app.whenReady();
-  mainWindow = await createMainWindow();
-})();
+  // TODO: Transform RTSP streams to websockets
+  // https://www.npmjs.com/package/node-rtsp-stream
+  
+})

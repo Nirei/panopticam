@@ -3,17 +3,15 @@
 
 <head>
 	<meta charset="utf-8" />
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src *" />
 	<title>Panopticam</title>
 	<link rel="stylesheet" href="./css/index.css" />
+	<script src="./js/index.js"></script>
 </head>
 
 <body>
 	<div class="container">
-		<header>
-			<div id="loader">
-				<h1>Panopticam</h1>
-			</div>
-		</header>
+		<div id="discovered-feeds" class="video-grid"></div>
 	</div>
 </body>
 

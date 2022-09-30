@@ -18,16 +18,17 @@
     "win": "electron-builder --windows"
   },
   "dependencies": {
-    "electron-reloader": "^1.2.1"
+    "electron": ">=16.0.2",
+    "node-rtsp-stream": "^0.0.9"
   },
   "devDependencies": {
-    "electron": ">=16.0.2",
     "electron-builder": "^22.11.7",
+    "electron-reloader": "^1.2.1",
     "eslint": "^8.4.1",
     "eslint-config-google": "^0.14.0"
   },
   "build": {
-    "appId": "com.company.AppName",
+    "appId": "org.lostrego.Panopticam",
     "mac": {
       "category": "public.app-category.developer-tools",
       "darkModeSupport": true
