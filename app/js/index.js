@@ -1,22 +1,24 @@
 const DOM_DISCOVERED_FEEDS_CONTAINER = 'discovered-feeds'
 const EVENT_NEW_HOST_DISCOVERED = 'event-new-host-discovered'
 
-function createVideoBox() {
+function createVideoBox(host) {
   const div = document.createElement('div')
+  div.id = `video-container-${host}-${crypto.randomUUID()}`
   div.className = 'video-feed-thumbnail'
   div.style.width = '200px'
   div.style.height = '150px'
   div.style.backgroundColor = 'black'
 
-  const video = document.createElement('video')
-  div.appendChild(video)
+  const canvas = document.createElement('canvas')
+  div.appendChild(canvas)
 
-  return div
+  new JSMpeg.VideoElement(div, host, { canvas, autoplay: true, control: false }, { disableGl: true })
+
+  document.getElementById(DOM_DISCOVERED_FEEDS_CONTAINER).appendChild(div)
 }
 
-function handleNewHostDiscovered(host) {
-  videoBox = createVideoBox()
-  document.getElementById(DOM_DISCOVERED_FEEDS_CONTAINER).appendChild(videoBox)
+function handleNewHostDiscovered(_event, value) {
+  createVideoBox(value)
 }
 
 window.registry.onHostDiscovered(handleNewHostDiscovered)

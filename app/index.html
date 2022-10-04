@@ -3,9 +3,10 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src *" />
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-eval'; connect-src *; style-src * 'unsafe-inline';" />
 	<title>Panopticam</title>
 	<link rel="stylesheet" href="./css/index.css" />
+	<script src="../node_modules/@cycjimmy/jsmpeg-player/dist/jsmpeg-player.umd.js"></script>
 	<script src="./js/index.js"></script>
 </head>
 

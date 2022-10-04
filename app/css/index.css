@@ -2,6 +2,12 @@
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+	background-color: #1e1e1e;
+}
+
 .video-grid {
 	display: grid;
+	grid-template-columns: 200px 200px 200px 200px;
+	gap: 10px;
 }

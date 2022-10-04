@@ -18,6 +18,7 @@
     "win": "electron-builder --windows"
   },
   "dependencies": {
+    "@cycjimmy/jsmpeg-player": "^6.0.5",
     "electron": ">=16.0.2",
     "node-rtsp-stream": "^0.0.9"
   },
