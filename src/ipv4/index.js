@@ -22,3 +22,4 @@ function* iterate(start = 0) {
 }
 
 exports.iterate = iterate
+exports.MAX_IP = MAX_IP

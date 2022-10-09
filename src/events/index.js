@@ -1,1 +1,1 @@
-exports.EVENT_HOST_DISCOVERED = 'event-host-discovered'
+exports.EVENT_NEW_HOST_DISCOVERED = 'event-new-host-discovered'

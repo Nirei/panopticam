@@ -6,7 +6,7 @@ class Source {
     this.width = width
     this.height = height
     this.fps = fps
-    this.strea = undefined
+    this.stream = undefined
   }
 
   start() {
@@ -19,8 +19,10 @@ class Source {
         '-vf': `scale=w=${this.width}:h=${this.height}:force_original_aspect_ratio=increase,crop=${this.width}:${this.height}`
       }
     })
+  }
 
-    console.log(this.stream.wsServer.port)
+  port() {
+    return this.stream.wsServer.address().port
   }
 
   stop() {

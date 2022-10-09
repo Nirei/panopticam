@@ -1,5 +1,4 @@
 const DOM_DISCOVERED_FEEDS_CONTAINER = 'discovered-feeds'
-const EVENT_NEW_HOST_DISCOVERED = 'event-new-host-discovered'
 
 function createVideoBox(host) {
   const div = document.createElement('div')
